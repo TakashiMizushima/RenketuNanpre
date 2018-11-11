@@ -14,6 +14,10 @@ console command<br>
   cir---share area view<br>
   chis++---history+<br>
   [chis--]---history-<br>
+  rt---move right
+  lf---move left
+  up---move up
+  dn---move down
   
   <<qt 5.11.0>><br>
   </p>
