@@ -1,7 +1,7 @@
 <html># RenketuNanpre
   <body>
     <p>
-<<console command>><br>
+console command<br>
   ada---add area<br>
   ads---add share area<br>
   adso---add share area only<br>
