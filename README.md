@@ -11,8 +11,8 @@ console command<br>
   lod---load<br>
   vec---pass line view<br>
   cir---share area view<br>
-  chis++---history+
-  [chis--]---history-
+  chis++---history+<br>
+  [chis--]---history-<br>
   
   <<qt 5.11.0>><br>
   </p>
