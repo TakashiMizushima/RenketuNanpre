@@ -11,8 +11,31 @@ console command<br>
   lod---load<br>
   vec---pass line view<br>
   cir---share area view<br>
+  chis++---history+
+  [chis--]---history-
   
   <<qt 5.11.0>><br>
   </p>
+  <p>
+  image1.png use command<br>
+  ada<br>ada<br>
+  vec<br>
+  cir<br>
+  ads 1 2 0 0 0 2<br>
+  cir<br>
+  sav<br>
+  sol<br>
+</p>
+  <p>
+  image2.png use command<br>
+  ada<br>ada<br>ada<br>
+  vec<br>
+  cir<br>
+  adst 2 2 1 0 0 0 2 2 2 0 0 1<br>
+  adst 0 1 2 1 0 0 0 2 2 1 1 0<br>
+  cir<br>
+  sav<br>
+  sol<br>
+</p>
   </body>
 </html>
