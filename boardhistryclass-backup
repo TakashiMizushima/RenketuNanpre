@@ -1,0 +1,230 @@
+#include"boardhistorycclass.h"
+boardhistorycclass::boardhistorycclass()
+{
+    brdcntdefault=0;
+    curenthistrycnt=0;
+}
+void boardhistorycclass::boardhistoryadd()
+{
+    boardgroupclass *bdg=new boardgroupclass;
+    brdhist.push_back(bdg);
+}
+void boardhistorycclass::paintEvent(QPaintEvent *eve,QPainter *painter)
+{
+    brdhist[curenthistrycnt]->paintEvent(eve,painter);
+}
+void boardhistorycclass::mousePressEvent(QMouseEvent *event)
+{
+    if(brdhist.size()==0){return;}
+    if(brdhist[curenthistrycnt]->brdgroup.size()==0){return;}
+    for(unsigned int i=0;i<brdhist[curenthistrycnt]->brdgroup.size();i++)
+    {
+        if(brdhist[curenthistrycnt]->brdgroup[i]->mouseRangeIs(event->pos())==false){brdhist[curenthistrycnt]->curentbrdnum=-1;}
+        else{brdhist[curenthistrycnt]->curentbrdnum=i;break;}
+    }
+    if(brdhist[curenthistrycnt]->curentbrdnum==-1){return;}
+    brdhist[curenthistrycnt]->mousePressEvent(event);
+}
+void boardhistorycclass::mouseMoveEvent(QMouseEvent *event)
+{
+    if(brdhist[curenthistrycnt]->curentbrdnum==-1){return;}
+    brdhist[curenthistrycnt]->mouseMoveEvent(event);
+}
+void boardhistorycclass::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(brdhist[curenthistrycnt]->curentbrdnum==-1){return;}
+    brdhist[curenthistrycnt]->mouseReleaseEvent(event);
+}
+boardgroupclass *boardhistorycclass::curentbrdgroupget()
+{
+    return brdhist[curenthistrycnt];
+}
+void boardhistorycclass::curentindexset(int id)
+{
+    if(id<0){return;}
+    if(id>=(signed int)brdhist.size()){return;}
+    curenthistrycnt=id;
+}
+void boardhistorycclass::curentindexadd(int id)
+{
+    if(curenthistrycnt+id<0){return;}
+    if(id+curenthistrycnt>=(signed int)brdhist.size()){return;}
+    curenthistrycnt+=id;
+}
+void boardhistorycclass::circledrawset(int enable)
+{
+    circledraw=enable;
+    for(unsigned int i=0;i<curentbrdgroupget()->brdgroup.size();i++)
+    {
+        curentbrdgroupget()->brdgroup[i]->enable.circledraw=enable;
+    }
+}
+void boardhistorycclass::boardhistorylastdel()
+{
+    for(int j=0;j<(int)brdhist[brdhist.size()-1]->brdgroup.size();j++)
+    {
+        delete brdhist[brdhist.size()-1]->brdgroup[j];
+        brdhist[brdhist.size()-1]->brdgroup.clear();
+    }
+    brdhist[brdhist.size()-1]->brdgroup.clear();
+    if(curenthistrycnt>=brdhist.size()-1){curenthistrycnt=curenthistrycnt=brdhist.size()-2;}
+    delete brdhist[brdhist.size()-1];
+    brdhist.erase(brdhist.end()-1);
+    for(int i=0;i<this->brdcntdefault;i++)
+    {
+        pairlst.erase(pairlst.end()-1);
+    }
+    /*
+    for(int j=0;j<(int)brdhist[brdhist.size()-1]->brdgroup.size();j++)
+    {
+        for(int h=0;h<9;h++)
+        {
+            for(int g=0;g<9;g++)
+            {
+                delete brdhist[brdhist.size()-1]->brdgroup[j]->data[h][g];
+            }
+        }
+        delete brdhist[brdhist.size()-1]->brdgroup[j];
+    }
+    brdhist[brdhist.size()-1]->brdgroup.clear();
+    if(curenthistrycnt>=brdhist.size()-1){curenthistrycnt=curenthistrycnt=brdhist.size()-2;}
+    delete brdhist[brdhist.size()-1];
+    brdhist.erase(brdhist.end()-1);
+    for(int i=0;i<this->brdcntdefault;i++)
+    {
+        delete pairlst[brdcntdefault-1-i];
+        pairlst.erase(pairlst.end()-1);
+    }
+    */
+}
+void boardhistorycclass::boardhistoryaddcopy()
+{
+    boardgroupclass *bdg=new boardgroupclass;
+
+    int pos1=brdhist.size()-1;
+    for(int i=0;i<brdhist[pos1]->brdgroup.size();i++)
+    {
+        bdg->boardclassadd();
+        //brdhist[pos1]->
+    }
+    for(int i=0;i<brdhist[pos1]->brdgroup.size();i++)
+    {
+        //brdhist[pos1]->brdgroup[i]=brdhist[pos2]->brdgroup[i];
+
+        bdg->brdgroup[i]->drawpos=brdhist[pos1]->brdgroup[i]->drawpos;
+        bdg->brdgroup[i]->index=brdhist[pos1]->brdgroup[i]->index;
+        for(int x=0;x<9;x++)
+        {
+            for(int y=0;y<9;y++)
+            {
+                bdg->brdgroup[i]->data[x][y]->index=brdhist[pos1]->brdgroup[i]->data[x][y]->index;
+                bdg->brdgroup[i]->data[x][y]->num=brdhist[pos1]->brdgroup[i]->data[x][y]->num;
+                bdg->brdgroup[i]->data[x][y]->xx=brdhist[pos1]->brdgroup[i]->data[x][y]->xx;
+                bdg->brdgroup[i]->data[x][y]->yy=brdhist[pos1]->brdgroup[i]->data[x][y]->yy;
+            }
+        }
+    }
+    brdhist.push_back(bdg);
+    if(brdcntdefault==0){brdcntdefault=pairlst.size();}
+    std::vector<boardhistorycclass::PAIRDATA *> palist;
+    for(int i=0;i<brdcntdefault;i++)
+    {
+        boardhistorycclass::PAIRDATA *pa=new boardhistorycclass::PAIRDATA;
+        (*pa).groupid=pos1+1;
+        (*pa).id1=pairlst[i]->id1;
+        (*pa).id2=pairlst[i]->id2;
+        (*pa).x1=pairlst[i]->x1;
+        (*pa).x2=pairlst[i]->x2;
+        (*pa).y1=pairlst[i]->y1;
+        (*pa).y2=pairlst[i]->y2;
+        (*pa).brd1=brdhist[pos1]->boardget(pa->id1);
+        (*pa).brd2=brdhist[pos1]->boardget(pa->id2);
+        palist.push_back(pa);
+    }
+    int gidmax=pairlst[pairlst.size()-1]->groupid;
+    for(int i=0;i<palist.size();i++)
+    {
+        pairlst.push_back(palist[i]);
+    }
+        //linkmake(palist[i]->groupid,palist[i]->id1,palist[i]->x1,palist[i]->y1,palist[i]->id2,palist[i]->x2,palist[i]->y2);
+    for(int i=0;i<pairlst.size();i++)
+    {
+        for(int x=0;x<3;x++)
+        {
+            for(int y=0;y<3;y++)
+            {
+                int gid=pairlst[i]->groupid;
+                int id1=pairlst[i]->id1;
+                int x1=pairlst[i]->x1;
+                int y1=pairlst[i]->y1;
+                int id2=pairlst[i]->id2;
+                int x2=pairlst[i]->x2;
+                int y2=pairlst[i]->y2;
+                boardclass::CHIPDATA *mm=memo.add();
+                *mm=*brdhist[gid]->brdgroup[id1]->data[x1*3+x][y1*3+y];
+                brdhist[gid]->brdgroup[id1]->data[x1*3+x][y1*3+y]=mm;
+                brdhist[gid]->brdgroup[id2]->data[x2*3+x][y2*3+y]=mm;
+            }
+        }
+    }
+}
+void boardhistorycclass::linkmake(int histid,int id1,int x1,int y1,int id2,int x2,int y2)
+{
+    if(id1<0){return;}
+    if(id2<0){return;}
+    boardclass::CHIPDATA *dm;
+    for(int i=0;i<3;i++)
+    {
+        for(int j=0;j<3;j++)
+        {
+            dm=memo.add();
+            brdhist[histid]->boardget(id1)->data[x1*3+i][y1*3+j]=dm;
+            brdhist[histid]->boardget(id2)->data[x2*3+i][y2*3+j]=dm;
+            dm->index=0;
+            dm->num=0;
+            dm->xx=0;
+            dm->yy=0;
+        }
+    }
+    boardhistorycclass::PAIRDATA *pr=new boardhistorycclass::PAIRDATA;
+    pr->id1=id1;
+    pr->x1=x1;
+    pr->y1=y1;
+    pr->id2=id2;
+    pr->x2=x2;
+    pr->y2=y2;
+    pr->groupid=histid;
+    pairlst.push_back(pr);
+
+    pr->brd1=brdhist[histid]->boardget(id1);
+    pr->brd2=brdhist[histid]->boardget(id2);
+}
+void boardhistorycclass::dumpfile(char *filename)
+{
+    FILE *f=fopen(filename,"a");
+    fprintf(f,"brdhist.size()=%d\n",brdhist.size());
+    for(int i=0;i<brdhist.size();i++)
+    {
+        fprintf(f,"brdhist[i]->brdgroup.size()=%d\n",brdhist[i]->brdgroup.size());
+        for(int j=0;j<brdhist[i]->brdgroup.size();j++)
+        {
+            for(int x=0;x<9;x++)
+            {
+                for(int y=0;y<9;y++)
+                {
+                    fprintf(f,"brdhist[i]->brdgroup[j]->data[x][y]->num=%d\n",brdhist[i]->brdgroup[j]->data[x][y]->num);
+                }
+            }
+
+        }
+    }
+    fprintf(f,"-------------------------------------------------\n");
+    fprintf(f,"pairlst.size()=%d\n",pairlst.size());
+    for(int i=0;i<pairlst.size();i++)
+    {
+        fprintf(f,"pairlst[i]->groupid=%d,pairlst[i]->id1=%d,pairlst[i]->x1=%d,pairlst[i]->y1=%d,pairlst[i]->id2=%d,pairlst[i]->x2=%d,pairlst[i]->y2=%d\n",pairlst[i]->groupid,pairlst[i]->id1,pairlst[i]->x1,pairlst[i]->y1,pairlst[i]->id2,pairlst[i]->x2,pairlst[i]->y2);
+    }
+    fprintf(f,"-------------------------------------------------\n");
+    fprintf(f,"-------------------------------------------------\n");
+    fclose(f);
+}
