@@ -6,6 +6,7 @@ console command<br>
   ads---add share area<br>
   adso---add share area only<br>
   adst---add share area twin<br>
+  edt---edit area
   sol---solve<br>
   sav---save<br>
   lod---load<br>
@@ -19,6 +20,8 @@ console command<br>
   <p>
   image1.png use command<br>
   ada<br>ada<br>
+  edt 0<br>
+  edt 1<br>
   vec<br>
   cir<br>
   ads 1 2 0 0 0 2<br>
@@ -29,6 +32,9 @@ console command<br>
   <p>
   image2.png use command<br>
   ada<br>ada<br>ada<br>
+  edt 0<br>
+  edt 1<br>
+  edt 2<br>
   vec<br>
   cir<br>
   adst 2 2 1 0 0 0 2 2 2 0 0 1<br>
