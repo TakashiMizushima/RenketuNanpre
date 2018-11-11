@@ -6,7 +6,7 @@ console command<br>
   ads---add share area<br>
   adso---add share area only<br>
   adst---add share area twin<br>
-  edt---edit area
+  edt---edit area<br>
   sol---solve<br>
   sav---save<br>
   lod---load<br>
