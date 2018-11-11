@@ -4,8 +4,10 @@
 console command<br>
   ada---add area<br>
   ads---add share area<br>
+      >>> ads areanumber(blue)[0] blockindex-row[0] blockindex-col[0] areanumber(blue)[1] blockindex-row[1] blockindex-col[1]
   adso---add share area only<br>
   adst---add share area twin<br>
+      >>> adst  areanumber(blue)[0] blockindex-row[0] blockindex-col[0] areanumber(blue)[1] blockindex-row[1] blockindex-col[1]  areanumber(blue)[2] blockindex-row[2] blockindex-col[2] areanumber(blue)[3] blockindex-row[3] blockindex-col[3]
   edt---edit area<br>
   sol---solve<br>
   sav---save<br>
