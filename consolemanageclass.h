@@ -130,6 +130,7 @@ public:
     void randommake(int index);
     void eraseset(int param);
     void rotation();
+    virtual void swapnum(int num1,int num2);
 
 };
 #endif // CONSOLEMANAGECLASS_H

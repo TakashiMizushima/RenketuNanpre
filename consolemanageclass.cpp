@@ -1482,3 +1482,59 @@ void consolemanageclass::eraseset(int param)
         solc->mainloopth(1);
     //if(param==1){mainwin->erase->eraserestore();}
 }
+void consolemanageclass::swapnum(int num1,int num2)
+{
+    for(int i=0;i<brdhist->brdhist[0]->brdgroup.size();i++)
+    {
+        for(int x1=0;x1<9;x1++)
+        {
+            for(int y1=0;y1<9;y1++)
+            {
+                if(num1==brdhist->brdhist[0]->brdgroup[i]->dataget(x1,y1))
+                {
+                    brdhist->brdhist[0]->brdgroup[i]->dataset(x1,y1,'w');
+                }
+            }
+        }
+    }
+    for(int i=0;i<brdhist->brdhist[0]->brdgroup.size();i++)
+    {
+        for(int x1=0;x1<9;x1++)
+        {
+            for(int y1=0;y1<9;y1++)
+            {
+                if(num2==brdhist->brdhist[0]->brdgroup[i]->dataget(x1,y1))
+                {
+                    brdhist->brdhist[0]->brdgroup[i]->dataset(x1,y1,'r');
+                }
+            }
+        }
+    }
+    for(int i=0;i<brdhist->brdhist[0]->brdgroup.size();i++)
+    {
+        for(int x1=0;x1<9;x1++)
+        {
+            for(int y1=0;y1<9;y1++)
+            {
+                if('w'==brdhist->brdhist[0]->brdgroup[i]->dataget(x1,y1))
+                {
+                    brdhist->brdhist[0]->brdgroup[i]->dataset(x1,y1,num2);
+                }
+            }
+        }
+    }
+
+    for(int i=0;i<brdhist->brdhist[0]->brdgroup.size();i++)
+    {
+        for(int x1=0;x1<9;x1++)
+        {
+            for(int y1=0;y1<9;y1++)
+            {
+                if('r'==brdhist->brdhist[0]->brdgroup[i]->dataget(x1,y1))
+                {
+                    brdhist->brdhist[0]->brdgroup[i]->dataset(x1,y1,num1);
+                }
+            }
+        }
+    }
+}

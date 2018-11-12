@@ -64,5 +64,6 @@ void consoleclass::CommandStringSet(QString command)
     if(leng==1 &&  strList[0]=="m+"){mapplus();}
     if(leng==1 &&  strList[0]=="rnd"){randommake(strList[1].toInt());}
     if(leng==2 &&  strList[0]=="erd"){eraseset(strList[1].toInt());}
+    if(leng==3 &&  strList[0]=="swapnum"){swapnum(strList[1].toInt(),strList[2].toInt());}
 
 }

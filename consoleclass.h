@@ -66,6 +66,7 @@ public:
     virtual void mapplus()=0;
     virtual void randommake(int index)=0;
     virtual void eraseset(int param)=0;
+    virtual void swapnum(int num1,int num2)=0;
 
 
 };
