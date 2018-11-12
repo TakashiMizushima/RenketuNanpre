@@ -20,6 +20,7 @@ console command<br>
   lf---move left<br>
   up---move up<br>
   dn---move down<br>
+  swapnum---swapnum num1 num2<br>
   
   <<qt 5.11.0>><br>
   </p>
