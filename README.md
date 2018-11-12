@@ -24,6 +24,7 @@ console command<br>
   swapnum---swapnum num1 num2<br>
   
   <<qt 5.11.0>><br>
+<<os : centos7 64bit>><br>
   </p>
   <p>
   image1.png use command<br>
