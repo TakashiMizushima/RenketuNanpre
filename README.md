@@ -49,5 +49,7 @@ console command<br>
   sav<br>
   sol<br>
 </p>
+<p>tutrial is [tutrial folder] view.-----> mp4 file
+  </p>
   </body>
 </html>
