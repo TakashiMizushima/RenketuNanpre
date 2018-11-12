@@ -1,5 +1,6 @@
 <html># RenketuNanpre
   <body>
+    <p>バグ存在します。自己責任でご使用ください。</p>
     <p>
 console command<br>
   ada---add area<br>
